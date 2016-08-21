@@ -1,0 +1,75 @@
+/* Empty. Add your own CSS if you like */
+.icon-margins {
+  position: relative;
+  top: 4px;
+}
+
+.logo-aconcagua {
+  width: 15vh;
+}
+
+.login-view
+{
+	background: url('../img/portfolio.png');
+  background-size: cover;
+  background-color: #333333;
+  opacity: 0.5;
+}
+
+.top-content
+{
+  height: 30%;
+}
+
+.app-copy
+{
+  text-align: center;
+  padding-top: 5vh;
+}
+
+.bottom-content
+{
+  height: 34%;
+}
+
+.icon-size{
+  font-size: 4.5vh;
+  margin: 5px;
+}
+.facebook-sign-in
+{
+  border-radius: 4px;
+  font-weight: 500;
+  color: #FFF;
+  background-color: #294886;
+  border-color: darken(#294886, 2);
+  text-decoration: none;
+  border-radius: 10px;
+  /*box-shadow: 0px 5px 0px 0px #002a4a;*/
+}
+
+.facebook-sign-in:hover
+{
+  color: #FFF;
+}
+
+.facebook-sign-in:visited
+{
+  color: #FFF;
+  background-color: #294886;
+}
+
+.facebook-sign-in:active
+{
+  color: #294886;
+}
+
+.img-omar{
+  width: 20vh;
+}
+
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
