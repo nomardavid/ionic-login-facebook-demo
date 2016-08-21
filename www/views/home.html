@@ -1,21 +1,21 @@
 <ion-view class="home-view">
   <ion-nav-title>
-    <span class="text-center">Mini-Perfil</span>
+    <span class="text-center">Min Profile</span>
   </ion-nav-title>
   <ion-content>
     <div class="row">
       <div class="col text-center card">
         <div class="card-content">
-          <h3 class="welcome-message">Hola {{user.name}} </h3>
+          <h3 class="welcome-message">Hi {{user.name}} !</h3>
           <img class="img-circle tex-center" ng-src="{{user.picture}}">
           <div class="item item-text-wrap">
-            Correo: {{user.email}}
+            Mail: {{user.email}}
           </div>
           <div class="item item-text-wrap">
             UserID: {{user.userID}}
           </div>
           <a class="button  button-block btn-logout animate red" ng-click="showLogOutMenu()">
-            Cerrar Sesión
+            Log Out
           </a>
         </div>
       </div>

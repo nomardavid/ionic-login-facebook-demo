@@ -2,15 +2,15 @@ angular.module('controllers', [])
 
 .controller('WelcomeCtrl', function($scope, $state, $q, UserFacebook, $ionicLoading) {
 
-  var fbLoginSuccess = function(response) {
+  var loginSuccess = function(response) {
     if (!response.authResponse){
-      fbLoginError("Cannot find the authResponse");
+      fbLoginError("Auth Error");
       return;
     }
 
     var authResponse = response.authResponse;
 
-    getFacebookProfileInfo(authResponse)
+    getProfileInfo(authResponse)
     .then(function(profileInfo) {
       UserFacebook.setUser({
         authResponse: authResponse,
@@ -24,7 +24,7 @@ angular.module('controllers', [])
       $state.go('app.home');
 
     }, function(fail){
-      console.log('profile info fail', fail);
+      console.log('profile get info fail', fail);
     });
   };
 
@@ -34,7 +34,7 @@ angular.module('controllers', [])
     $ionicLoading.hide();
   };
 
-  var getFacebookProfileInfo = function (authResponse) {
+  var getProfileInfo = function (authResponse) {
     var info = $q.defer();
 
     facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
@@ -61,7 +61,7 @@ angular.module('controllers', [])
 
 				if(!user.userID)
 				{
-					getFacebookProfileInfo(success.authResponse)
+					getProfileInfo(success.authResponse)
 					.then(function(profileInfo) {
 
 						UserFacebook.setUser({
@@ -86,9 +86,9 @@ angular.module('controllers', [])
         console.log('getLoginStatus', success.status);
 
 			  $ionicLoading.show({
-          template: 'Iniciando Sesión...'
+          template: 'Loging...'
         });
-        facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
+        facebookConnectPlugin.login(['email', 'public_profile'], loginSuccess, fbLoginError);
       }
     });
   };
@@ -106,16 +106,16 @@ angular.module('controllers', [])
 
 	$scope.showLogOutMenu = function() {
 		var hideSheet = $ionicActionSheet.show({
-			destructiveText: 'Cerrar sesión',
-			titleText: '¿Estas seguro ?',
-			cancelText: 'Cancelar',
+			destructiveText: 'Log Out',
+			titleText: 'Are you sure ?',
+			cancelText: 'Cancel',
 			cancel: function() {},
 			buttonClicked: function(index) {
 				return true;
 			},
 			destructiveButtonClicked: function(){
 				$ionicLoading.show({
-					template: 'Cerrando Sesión...'
+					template: 'Close Session...'
 				});
 
         //facebook logout
