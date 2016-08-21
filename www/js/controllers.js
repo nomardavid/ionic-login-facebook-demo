@@ -1,5 +1,6 @@
 angular.module('controllers', [])
-.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, UserService){
+
+.controller('WelcomeCtrl', function($scope, $state, $q, UserFacebook, $ionicLoading) {
 
   var fbLoginSuccess = function(response) {
     if (!response.authResponse){
@@ -11,8 +12,7 @@ angular.module('controllers', [])
 
     getFacebookProfileInfo(authResponse)
     .then(function(profileInfo) {
-
-      UserService.setUser({
+      UserFacebook.setUser({
         authResponse: authResponse,
 				userID: profileInfo.id,
 				name: profileInfo.name,
@@ -21,21 +21,18 @@ angular.module('controllers', [])
       });
 
       $ionicLoading.hide();
-      $state.go('profile');
+      $state.go('app.home');
 
     }, function(fail){
-
       console.log('profile info fail', fail);
     });
   };
-
 
 
   var fbLoginError = function(error){
     console.log('fbLoginError', error);
     $ionicLoading.hide();
   };
-
 
   var getFacebookProfileInfo = function (authResponse) {
     var info = $q.defer();
@@ -53,7 +50,6 @@ angular.module('controllers', [])
     return info.promise;
   };
 
-  //ngclick func
   $scope.loginFB = function() {
 
     facebookConnectPlugin.getLoginStatus(function(success){
@@ -61,15 +57,14 @@ angular.module('controllers', [])
 
         console.log('getLoginStatus', success.status);
 
-				var user = UserService.getUser('facebook');
+				var user = UserFacebook.getUser('facebook');
 
 				if(!user.userID)
 				{
 					getFacebookProfileInfo(success.authResponse)
 					.then(function(profileInfo) {
 
-						//for the purpose of this example I will store user data on local storage
-						UserService.setUser({
+						UserFacebook.setUser({
 							authResponse: success.authResponse,
 							userID: profileInfo.id,
 							name: profileInfo.name,
@@ -77,14 +72,13 @@ angular.module('controllers', [])
 							picture : "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
 						});
 
-						$state.go('profile');
+						$state.go('app.home');
 
 					}, function(fail){
-						//fail get profile info
 						console.log('profile info fail', fail);
 					});
 				}else{
-					$state.go('profile');
+					$state.go('app.home');
 				}
 
      } else {
@@ -92,12 +86,49 @@ angular.module('controllers', [])
         console.log('getLoginStatus', success.status);
 
 			  $ionicLoading.show({
-          template: 'Logging in...'
+          template: 'Iniciando Sesión...'
         });
-
-        //ask the permissions you need. You can learn more about FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.7
         facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
       }
     });
   };
 })
+
+
+
+.controller('AppCtrl', function($scope){
+
+})
+
+.controller('HomeCtrl', function($scope, UserFacebook, $ionicActionSheet, $state, $ionicLoading){
+
+	$scope.user = UserFacebook.getUser();
+
+	$scope.showLogOutMenu = function() {
+		var hideSheet = $ionicActionSheet.show({
+			destructiveText: 'Cerrar sesión',
+			titleText: '¿Estas seguro ?',
+			cancelText: 'Cancelar',
+			cancel: function() {},
+			buttonClicked: function(index) {
+				return true;
+			},
+			destructiveButtonClicked: function(){
+				$ionicLoading.show({
+					template: 'Cerrando Sesión...'
+				});
+
+        //facebook logout
+        facebookConnectPlugin.logout(function(){
+          $ionicLoading.hide();
+          $state.go('welcome');
+        },
+        function(fail){
+          $ionicLoading.hide();
+        });
+			}
+		});
+	};
+})
+
+;

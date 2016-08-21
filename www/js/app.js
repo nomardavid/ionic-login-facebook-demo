@@ -7,15 +7,10 @@ angular.module('starter', ['ionic', 'controllers', 'services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
     }
     if(window.StatusBar) {
       StatusBar.styleDefault();
@@ -23,22 +18,28 @@ angular.module('starter', ['ionic', 'controllers', 'services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider){
+.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-  .state('login', {
-    url: '/login',
-    templateUrl: "views/login.html",
-    controller: 'loginCtrl'
-
+  .state('welcome', {
+    url: '/welcome',
+    templateUrl: "views/welcome.html",
+    controller: 'WelcomeCtrl'
   })
 
-  .state('profile', {
-    url: "/profile",
+  .state('app', {
+    url: "/app",
+    abstract: true,
+    templateUrl: "views/sidemenu.html",
+    controller: 'AppCtrl'
+  })
+
+  .state('app.home', {
+    url: "/home",
     views: {
       'menuContent': {
-        templateUrl: "views/profile.html",
-        controller: 'profileCtrl'
+        templateUrl: "views/home.html",
+        controller: 'HomeCtrl'
       }
     }
   })
@@ -46,5 +47,5 @@ angular.module('starter', ['ionic', 'controllers', 'services'])
   ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/welcome');
 })
