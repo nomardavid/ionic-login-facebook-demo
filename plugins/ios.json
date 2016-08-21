@@ -1,0 +1,32 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.startapplabs.facebook-login"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.startapplabs.facebook-login"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.startapplabs.facebook-login"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.startapplabs.facebook-login"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.startapplabs.facebook-login"
+        },
+        "phonegap-facebook-plugin": {
+            "APP_ID": "333446570322150",
+            "APP_NAME": "login-labsXD",
+            "PACKAGE_NAME": "com.startapplabs.facebook-login"
+        }
+    },
+    "dependent_plugins": {}
+}

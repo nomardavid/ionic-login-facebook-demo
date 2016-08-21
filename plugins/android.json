@@ -1,0 +1,32 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.ionicframework.testlabsxd329032"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.testlabsxd329032"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.testlabsxd329032"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.testlabsxd329032"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.testlabsxd329032"
+        },
+        "phonegap-facebook-plugin": {
+            "APP_ID": "333446570322150",
+            "APP_NAME": "login-labsXD",
+            "PACKAGE_NAME": "com.ionicframework.testlabsxd329032"
+        }
+    },
+    "dependent_plugins": {}
+}
